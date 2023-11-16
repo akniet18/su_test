@@ -33,6 +33,7 @@ class Login(APIView):
                         'first_name': user.first_name,
                         'last_name': user.last_name,
                         # 'location': user.location,
+                        'email': user.email,
                         # 'avatar': request.build_absolute_uri(user.avatar.url),
                         # 'birth_date': user.birth_date,
                         # 'device_id': user.device_id
