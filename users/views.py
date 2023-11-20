@@ -25,16 +25,17 @@ class Login(APIView):
                     return Response({'status': 'wrong'})
                 t, _ = Token.objects.get_or_create(user=user)
                 return Response(
-                    {   
+                    {
                         'status': 'ok',
                         "key": t.key, 
-                        "uid": user.id, 
+                        "uid": user.id,
                         "is_staff": user.is_staff,
                         'first_name': user.first_name,
                         'last_name': user.last_name,
+                        'username': user.username,
                         # 'location': user.location,
                         'email': user.email,
-                        # 'avatar': request.build_absolute_uri(user.avatar.url),
+                        'avatar': request.build_absolute_uri(user.avatar.url),
                         # 'birth_date': user.birth_date,
                         # 'device_id': user.device_id
                     }
