@@ -92,14 +92,25 @@ WSGI_APPLICATION = 'su_test.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'railway',
+#         'USER': 'postgres',
+#         'PASSWORD': 'dffccb4d1CbfF6eEb1DeE*b66A42GD2A',
+#         'HOST': 'viaduct.proxy.rlwy.net',
+#         'PORT': '28971',
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'railway',
-        'USER': 'postgres',
-        'PASSWORD': 'dffccb4d1CbfF6eEb1DeE*b66A42GD2A',
-        'HOST': 'viaduct.proxy.rlwy.net',
-        'PORT': '28971',
+        'USER': 'user',
+        'PASSWORD': 'pwd123',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
