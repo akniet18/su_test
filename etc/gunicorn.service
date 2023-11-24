@@ -1,8 +1,17 @@
 [Unit]
-Description=gunicorn socket
+Description=gunicorn daemon
+Requires=gunicorn.socket
+After=network.target
 
-[Socket]
-ListenStream=/run/gunicorn.sock
+[Service]
+User=uzver
+Group=www-data
+WorkingDirectory=/home/uzver/su_test
+ExecStart=/home/uzver/venv/bin/gunicorn \
+          --access-logfile - \
+          --workers 3 \
+          --bind unix:/run/gunicorn.sock \
+          su_test.wsgi:application
 
 [Install]
-WantedBy=sockets.target
+WantedBy=multi-user.target
