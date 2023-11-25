@@ -33,6 +33,7 @@ class CheckUserInAudience2(APIView):
     def get(self, request):
         s = CheckUserSer2(data=request.data)
         if s.is_valid():
+            print(s.validated_data)
             user = User.objects.get(card_id = s.validated_data['card_id'])
             auditory = Auditory.objects.get(auditory_id = s.validated_data['id'])
             schedule = Schedule.objects.get(audience = auditory)
