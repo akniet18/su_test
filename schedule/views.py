@@ -29,7 +29,7 @@ class CheckUserInAudience(APIView):
 
 
 class CheckUserInAudience2(APIView):
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.AllowAny,)
     def get(self, request):
         s = CheckUserSer2(data=request.data)
         if s.is_valid():
