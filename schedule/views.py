@@ -35,10 +35,13 @@ class CheckUserInAudience2(APIView):
         if s.is_valid():
             print(s.validated_data)
             user = User.objects.get(card_id = s.validated_data['card_id'])
-            auditory = Auditory.objects.get(auditory_id = s.validated_data['id'])
-            schedule = Schedule.objects.get(audience = auditory)
-            if user in schedule.students.all():
-                return Response({'status': "ok"})
+            if user:
+                auditory = Auditory.objects.get(auditory_id = s.validated_data['id'])
+                schedule = Schedule.objects.get(audience = auditory)
+                if user in schedule.students.all():
+                    return Response({'status': "ok"})
+                else:
+                    return Response({'status': 'not found'})
             else:
                 return Response({'status': 'not found'})
         else:
