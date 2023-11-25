@@ -38,9 +38,9 @@ class CheckUserInAudience2(APIView):
             if user:
                 auditory = Auditory.objects.filter(auditory_id = s.validated_data['id'])
                 if auditory:
-                    schedule = Schedule.objects.filter(audience = auditory)
+                    schedule = Schedule.objects.filter(audience = auditory[0])
                     if schedule:
-                        if user[0] in schedule.students.all():
+                        if user[0] in schedule[0].students.all():
                             return Response({'status': "ok"})
                         else:
                             return Response({'status': 'not found'})
