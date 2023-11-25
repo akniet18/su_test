@@ -14,5 +14,6 @@ class User(AbstractUser):
     birth_date = models.DateField(null=True, blank=True)
     email = models.EmailField(unique=True, null=True, blank=True)
     avatar = models.ImageField(upload_to=user_photos_dir, blank=True, null=True, default="default/default.png")
+    card_id = models.CharField(max_length=255, blank=True, null=True)
     # location = models.TextField(blank=True, null=True)
     # device_id = models.CharField(max_length=500, blank=True, null=True)

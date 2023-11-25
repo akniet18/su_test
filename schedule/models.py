@@ -4,6 +4,7 @@ User=get_user_model()
 
 class Auditory(models.Model):
     number = models.CharField(max_length=255)
+    auditory_id = models.CharField(max_length=255, blank=True, null=True)
     corpus = models.CharField(max_length=255)
 
     def __str__(self):
