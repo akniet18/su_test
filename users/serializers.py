@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
 from .models import * 
+from schedule.models import * 
 from django.contrib.auth.password_validation import validate_password
 
 class LoginSer(serializers.Serializer):
@@ -41,3 +42,20 @@ class RegisterSerializer(serializers.ModelSerializer):
         user.set_password(validated_data['password'])
         user.save()
         return user
+    
+
+class userSer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = "__all__"
+
+class auditSer(serializers.ModelSerializer):
+    class Meta:
+        model = Auditory
+        fields = "__all__"
+
+class HistorySer(serializers.Serializer):
+    user = userSer()
+    auditory = auditSer()
+    last_pick = serializers.DateTimeField()
+    status = serializers.IntegerField()

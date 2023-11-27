@@ -50,3 +50,12 @@ class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
     permission_classes = (permissions.AllowAny,)
     serializer_class = RegisterSerializer
+
+
+class History(APIView):
+    permission_classes = (permissions.AllowAny,)
+
+    def get(self, request):
+        users = HistoryModel.objects.filter(user__is_superuser=False).order_by('-last_pick')
+        ser = HistorySer(users, many=True)
+        return Response(ser.data)

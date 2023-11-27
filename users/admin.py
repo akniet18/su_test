@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import User
+from .models import User, HistoryModel
 
 
 class AuthorAdmin(admin.ModelAdmin):
@@ -7,4 +7,5 @@ class AuthorAdmin(admin.ModelAdmin):
 
 
 admin.site.register(User, AuthorAdmin)
+admin.site.register(HistoryModel)
 

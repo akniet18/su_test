@@ -15,5 +15,16 @@ class User(AbstractUser):
     email = models.EmailField(unique=True, null=True, blank=True)
     avatar = models.ImageField(upload_to=user_photos_dir, blank=True, null=True, default="default/default.png")
     card_id = models.CharField(max_length=255, blank=True, null=True)
+    last_pick = models.DateTimeField(blank=True, null=True)
     # location = models.TextField(blank=True, null=True)
     # device_id = models.CharField(max_length=500, blank=True, null=True)
+
+
+class HistoryModel(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    auditory = models.ForeignKey('schedule.Auditory', on_delete=models.CASCADE)
+    last_pick = models.DateTimeField(blank=True, null=True)
+    status = models.IntegerField(blank=True, null=True)
+    
+    def __str__(self):
+        return f'{self.user.username}'
