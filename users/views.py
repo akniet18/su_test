@@ -58,4 +58,4 @@ class History(APIView):
     def get(self, request):
         users = HistoryModel.objects.filter(user__is_superuser=False).order_by('-last_pick')
         ser = HistorySer(users, many=True)
-        return Response(ser.data)
+        return Response(ser.data, safe=False, json_dumps_params={'ensure_ascii':False})
