@@ -11,7 +11,8 @@ from rest_framework.decorators import permission_classes
 from rest_framework import generics, permissions, status, views
 from django.conf import settings
 import serial
-from datetime import datetime    
+# from datetime import datetime    
+from django.utils import timezone
 
 class CheckUserInAudience(APIView):
     permission_classes = (permissions.IsAuthenticated,)
@@ -41,14 +42,14 @@ class CheckUserInAudience2(APIView):
                 auditory = Auditory.objects.filter(auditory_id = s.validated_data['id'])
                 if auditory:
                     history = HistoryModel.objects.get_or_create(user=user[0], auditory = auditory[0])
-                    history[0].last_pick = datetime.now()
+                    history[0].last_pick = timezone.now()
                     history[0].save()
                     schedule = Schedule.objects.filter(audience = auditory[0])
                     if schedule:
                         if user[0] in schedule[0].students.all():
                             history[0].status = 1
                             history[0].save()
-                            user[0].last_pick = datetime.now()
+                            user[0].last_pick = timezone.now()
                             user[0].save()
                             return Response({'status': "ok"})
                         else:
