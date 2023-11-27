@@ -57,5 +57,5 @@ class auditSer(serializers.ModelSerializer):
 class HistorySer(serializers.Serializer):
     user = userSer()
     auditory = auditSer()
-    last_pick = serializers.DateTimeField()
+    last_pick = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S")
     status = serializers.IntegerField()
