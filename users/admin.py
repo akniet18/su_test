@@ -1,7 +1,8 @@
 from django import forms
 from django.contrib import admin
 from .models import User, HistoryModel
-from django.contrib.auth.forms import UserChangeForm,AdminPasswordChangeForm
+from django.contrib.auth.forms import AdminPasswordChangeForm
+from django.contrib.auth.forms import ReadOnlyPasswordHashField
 
 class UserCreationForm(forms.ModelForm):
     password = forms.CharField(label='Password', widget=forms.PasswordInput)
@@ -26,11 +27,21 @@ class UserCreationForm(forms.ModelForm):
         if commit:
             user.save()
         return user
+    
+class UserChangeForm(forms.ModelForm):
+    """A form for updating users. Includes all the fields on
+    the user, but replaces the password field with admin's
+    disabled password hash display field.
+    """
+    password = ReadOnlyPasswordHashField()
+
+    class Meta:
+        model = User
+        fields = ('email', 'password', 'date_of_birth', 'is_active', 'is_admin')
 
 class AuthorAdmin(admin.ModelAdmin):
     add_form = UserCreationForm
     form = UserChangeForm
-    change_password_form = AdminPasswordChangeForm
     list_display = ["username", "first_name", "last_name", "card_id"]
 
 
