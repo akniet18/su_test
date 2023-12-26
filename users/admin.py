@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib import admin
 from .models import User, HistoryModel
+from django.contrib.auth.forms import UserChangeForm,AdminPasswordChangeForm
 
 class UserCreationForm(forms.ModelForm):
     password = forms.CharField(label='Password', widget=forms.PasswordInput)
@@ -28,6 +29,8 @@ class UserCreationForm(forms.ModelForm):
 
 class AuthorAdmin(admin.ModelAdmin):
     add_form = UserCreationForm
+    form = UserChangeForm
+    change_password_form = AdminPasswordChangeForm
     list_display = ["username", "first_name", "last_name", "card_id"]
 
 
