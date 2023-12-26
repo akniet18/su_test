@@ -3,6 +3,7 @@ from django.contrib import admin
 from .models import User, HistoryModel
 from django.contrib.auth.forms import AdminPasswordChangeForm
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
+from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
 class UserCreationForm(forms.ModelForm):
     password = forms.CharField(label='Password', widget=forms.PasswordInput)
@@ -39,7 +40,7 @@ class UserChangeForm(forms.ModelForm):
         model = User
         fields = ('email', 'password', 'date_of_birth', 'is_active', 'is_admin')
 
-class AuthorAdmin(admin.ModelAdmin):
+class AuthorAdmin(BaseUserAdmin):
     add_form = UserCreationForm
     form = UserChangeForm
     list_display = ["username", "first_name", "last_name", "card_id"]
